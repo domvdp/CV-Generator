@@ -5,10 +5,6 @@ from django.template import loader
 import pdfkit
 import io
 
-
-config = pdfkit.configuration(wkhtmltopdf="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
-
-
 # Create your views here.
 def form(request):
     if request.method == "POST":
@@ -31,6 +27,8 @@ def resume(request, id):
     user_profile = Profile.objects.get(pk=id)
     template = loader.get_template("resume.html")
     html = template.render({'user_profile': user_profile})
+
+    config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
 
     pdf = pdfkit.from_string(html, False, configuration=config)
     response = HttpResponse(pdf, content_type='application/pdf')
