@@ -28,7 +28,7 @@ def resume(request, id):
     template = loader.get_template("resume.html")
     html = template.render({'user_profile': user_profile})
 
-    config = pdfkit.configuration(wkhtmltopdf="..\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
+    config = pdfkit.configuration(wkhtmltopdf="wkhtmltopdf\\bin\\wkhtmltopdf.exe")
 
     pdf = pdfkit.from_string(html, False, configuration=config)
     response = HttpResponse(pdf, content_type='application/pdf')
