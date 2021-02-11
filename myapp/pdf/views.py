@@ -30,7 +30,7 @@ def resume(request, id):
 
     config = pdfkit.configuration(wkhtmltopdf="C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
 
-    pdf = pdfkit.from_string(html, False, configuration=config)
+    pdf = pdfkit.from_url(html, False, configuration=config)
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content=Disposition'] = 'attachments'
 
